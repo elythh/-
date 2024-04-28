@@ -1,0 +1,8 @@
+keys:
+- &gwen age1xy5n7cnk3xtfvdp6mrryamg4t8namfu5sk93tt6vwhrz4z6nypxq8jd9zx
+
+creation_rules:
+- path_regex: secrets.yaml$
+  key_groups:
+  - age:
+    - *gwen
