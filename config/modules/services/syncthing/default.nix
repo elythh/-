@@ -1,20 +1,16 @@
-{ config, lib, pkgs, ... }:
-
-let
-  hostName = config.networking.hostName;
-  otherMachineNames =
-    lib.remove config.networking.hostName (
-      builtins.filter (machine: machine != "yellowstone.cofree.coffee") (builtins.attrNames (builtins.readDir ../../../machines))
-    );
-
-  syncthingMachineIds = {
-    sower = "QR6FWXC-CE7YTWC-D5FTHRL-R74OZ2L-RV4JIWP-TWKBQ7A-ARP637O-LFBPRQK";
-    lorean = "BRI57JX-WTQMZJI-IN4PZJQ-QRXQLI2-USIIIYR-DAGJXMP-LDPDGDI-F7TOYQH";
-    nightshade = "YWQU6WT-7FKGWGT-UXMNJRT-DONET7A-ZJZ2D6H-AOQEP5S-4ZXZSLL-Y2VDWQ6";
-    phone = "3ORQWGG-OX63V27-B4OD2YV-IP54EQE-SUF6PQO-CVBIHBT-RI7DQPJ-2CGZ4AO";
-  };
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  hostName = config.networking.hostName;
+  otherMachineNames = lib.remove config.networking.hostName (
+    builtins.filter (machine: machine != "yellowstone.cofree.coffee") (builtins.attrNames (builtins.readDir ../../../machines))
+  );
+
+  syncthingMachineIds = {};
+in {
   boot.kernel.sysctl."fs.inotify.max_user_watches" = 1048576;
 
   services.syncthing = {

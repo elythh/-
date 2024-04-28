@@ -1,9 +1,6 @@
-{ config, ... }:
-
-let
+{config, ...}: let
   homeDir = config.primary-user.home-manager.home.homeDirectory;
-in
-{
+in {
   primary-user.home-manager.home = rec {
     sessionPath = [
       "${homeDir}/.cabal/bin"
